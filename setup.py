@@ -21,5 +21,5 @@ setup(name=ydeos_forces.__name__,
         'Topic :: Software Development',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python :: 3.7'],
-      keywords='benchmark',
+      keywords='force forces',
       packages=['ydeos_forces'])
