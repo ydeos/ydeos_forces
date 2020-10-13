@@ -1,13 +1,13 @@
 # coding: utf-8
 
-r"""ydeos_forces __init__"""
+r"""ydeos_forces __init__.py."""
 
 # References
 # ----------
 # http://civile.utcb.ro/cmsdc/mechanics.pdf
 # http://ocw.nthu.edu.tw/ocw/upload/43/716/static_ch3.pdf
 
-__name__ = "ydeos_forces"
+__project_name__ = "ydeos_forces"
 __description__ = "Forces model"
 
 __version__ = "2020.10.10"

@@ -3,13 +3,15 @@
 
 r"""ydeos_forces's setup.py"""
 
-import ydeos_forces
 from distutils.core import setup
 
-setup(name=ydeos_forces.__name__,
+import ydeos_forces
+
+
+setup(name=ydeos_forces.__project_name__,
       version=ydeos_forces.__version__,
       description=ydeos_forces.__description__,
-      long_description='Forces model',
+      long_description='Forces model, including a Force and a SystemOfForces',
       url=ydeos_forces.__url__,
       download_url=ydeos_forces.__download_url__,
       author=ydeos_forces.__author__,

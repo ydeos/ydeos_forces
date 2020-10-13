@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-r"""Forces example"""
+r"""Forces example."""
 
 from ydeos_forces.forces import Force, SystemOfForces
 

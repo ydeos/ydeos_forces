@@ -1,13 +1,16 @@
 # coding: utf-8
 
-r"""Force model"""
+r"""Force model."""
 
-from typing import Tuple, List
+from typing import List, Tuple
+
 import numpy as np
 
 
-class Force(object):
-    """A force represented by:
+class Force:
+    """Force model.
+
+    A force represented by:
     - a vector (force parameter)
     - acting at a given position (position parameter)
 
@@ -18,6 +21,7 @@ class Force(object):
     name : A name given to the force.
 
     """
+
     def __init__(self,
                  force: Tuple[float, float, float] = None,
                  position: Tuple[float, float, float] = None,
@@ -28,9 +32,8 @@ class Force(object):
             if len(force) != 3:
                 msg = "A Force object vector should be initialized with a tuple of length == 3"
                 raise ValueError(msg)
-            else:  # len(force) == 3
-                # raises ValueError if cast impossible
-                self.force = (float(force[0]), float(force[1]), float(force[2]))
+            # raises ValueError if cast impossible
+            self.force = (float(force[0]), float(force[1]), float(force[2]))
 
         if position is None:
             self.position = (0., 0., 0.)
@@ -38,14 +41,19 @@ class Force(object):
             if len(position) != 3:
                 msg = "A Force object position should be initialized with a tuple of length == 3"
                 raise ValueError(msg)
-            else:
-                self.position = (float(position[0]), float(position[1]), float(position[2]))
+            self.position = (float(position[0]), float(position[1]), float(position[2]))
 
         self.name = name
 
-    def moment(self, point_of_reference: Tuple[float, float, float]) -> np.ndarray:
-        """Moment of the force about the origin of the frame of reference used to define 'position'
+    def moment(self,
+               point_of_reference: Tuple[float, float, float]) -> np.ndarray:
+        """Moment created by the force.
 
+        Moment of the force about the origin of the frame of reference used
+        to define 'position'.
+
+        Parameters
+        ----------
         point_of_reference : x, y, z coordinates of the point of reference
 
         """
@@ -56,49 +64,46 @@ class Force(object):
 
     @property
     def x(self) -> float:
-        r"""X component of Force"""
+        r"""X component of Force."""
         return self.force[0]
 
     @property
     def y(self) -> float:
-        r"""Y component of Force"""
+        r"""Y component of Force."""
         return self.force[1]
 
     @property
     def z(self) -> float:
-        r"""Z component of Force"""
+        r"""Z component of Force."""
         return self.force[2]
 
     @property
     def px(self) -> float:
-        r"""X coordinate of the point of application"""
+        r"""X coordinate of the point of application."""
         return self.position[0]
 
     @property
     def py(self) -> float:
-        r"""Y coordinate of the point of application"""
+        r"""Y coordinate of the point of application."""
         return self.position[1]
 
     @property
     def pz(self) -> float:
-        r"""Z coordinate of the point of application"""
+        r"""Z coordinate of the point of application."""
         return self.position[2]
 
     def __repr__(self) -> str:
-        """Readable representation of the Force"""
-        if self.name is None:
-            n = 'no_name'
-        else:
-            n = self.name
-        return 'F:' + str(self.force) + '@' + str(self.position) + '-name: ' + str(n)
+        """Readable representation of the Force."""
+        name = 'no_name' if self.name is None else self.name
+        return f"F:{str(self.force)}@{str(self.position)}-name: {str(name)}"
 
     def __str__(self) -> str:
-        r"""User friendly representation of the Force"""
+        r"""User friendly representation of the Force."""
         return self.__repr__()
 
 
-class SystemOfForces(object):
-    """A system of forces made of n forces
+class SystemOfForces:
+    """A system of forces made of n forces.
 
     Parameters
     ----------
@@ -108,6 +113,7 @@ class SystemOfForces(object):
                                  optional (default : [0., 0., 0.])
         Represents the x, y, z coordinates of the point
         of reference for moments calculations.
+
     """
 
     def __init__(self,
@@ -121,46 +127,46 @@ class SystemOfForces(object):
 
     @property
     def moment(self) -> np.ndarray:
-        """The moment vector coordinates [x,y,z] of the SystemOfForces"""
+        """The moment vector coordinates [x,y,z] of the SystemOfForces."""
         # axis = 0 -> sum of each column
         return np.sum([f.moment(self.moments_point_of_reference) for f in self.forces], axis=0)
 
     @property
     def mx(self) -> float:
-        r"""Moment around X axis"""
+        r"""Moment around X axis."""
         return self.moment[0]
 
     @property
     def my(self) -> float:
-        r"""Moment around Y axis"""
+        r"""Moment around Y axis."""
         return self.moment[1]
 
     @property
     def mz(self) -> float:
-        r"""Moment around Z axis"""
+        r"""Moment around Z axis."""
         return self.moment[2]
 
     @property
     def force(self) -> np.ndarray:
-        """The sum of all force vectors [x,y,z] of the SystemOfForces"""
+        """The sum of all force vectors [x,y,z] of the SystemOfForces."""
         # axis = 0 -> sum of each column
         return np.sum([f.force for f in self.forces], axis=0)
 
     @property
     def x(self) -> float:
-        r"""X component of the resulting force"""
+        r"""X component of the resulting force."""
         return self.force[0]
 
     @property
     def y(self) -> float:
-        r"""Y component of the resulting force"""
+        r"""Y component of the resulting force."""
         return self.force[1]
 
     @property
     def z(self) -> float:
-        r"""Z component of the resulting force"""
+        r"""Z component of the resulting force."""
         return self.force[2]
 
     def add_force(self, force: Force):
-        """Add a Force object to the SystemOfForces object"""
+        """Add a Force object to the SystemOfForces object."""
         self.forces.append(force)
