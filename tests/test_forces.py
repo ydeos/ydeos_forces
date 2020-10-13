@@ -32,4 +32,3 @@ def test_system_of_forces_ref_somewhere_else():
     sf_2.add_force(force_y_minus_at_1_0_0)
     assert (sf_2.force == [0., 0.,  0.]).all()
     assert (sf_2.moment == [0., 40., 0.]).all()
-

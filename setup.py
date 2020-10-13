@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-r"""ydeos_forces's setup.py"""
+r"""ydeos_forces's setup.py."""
 
 from distutils.core import setup
 
