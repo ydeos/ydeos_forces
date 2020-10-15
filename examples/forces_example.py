@@ -5,8 +5,6 @@ r"""Forces example."""
 
 from ydeos_forces.forces import Force, SystemOfForces
 
-# fam1 = ForceAndMoment([0,0,1],[0,0,0], [0,1,0])
-# print fam1.moment
 
 force_x_plus_at_0_m1_0 = Force((1., 0., 10.), (0., -1., 0.))
 force_x_minus_at_0_1_0 = Force((-1., 0., 10.), (0., 1., 0.))
@@ -31,10 +29,10 @@ sf_2.add_force(force_y_minus_at_1_0_0)
 
 print('*************')
 print('System of Forces - ref at 0,0,0')
-print('Total force : %s' % str(sf.force))
-print('Total moment : %s' % str(sf.moment))
+print(f'Total force : {sf.force}')
+print(f'Total moment : {sf.moment}')
 
 print('*************')
 print('System of Forces - ref somewhere else')
-print('Total force : %s' % str(sf_2.force))
-print('Total moment : %s' % str(sf_2.moment))
+print(f'Total force : {sf_2.force}')
+print(f'Total moment : {sf_2.moment}')
